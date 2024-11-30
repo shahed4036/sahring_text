@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Page</title>
+</head>
+<body>
+    <h1>Output Page</h1>
+    <p id="outputText">Loading...</p>
+    <br>
+    <a href="input.html">Go back to Input Page</a>
+
+    <script>
+        // Fetch the text saved from the server
+        window.onload = function() {
+            fetch('/getText')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('outputText').textContent = data.text || 'No text available';
+                })
+                .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Page</title>
+</head>
+<body>
+    <h1>Input Page</h1>
+    <textarea id="textInput" rows="10" cols="30" placeholder="Enter your text here"></textarea>
+    <br>
+    <button onclick="saveText()">Save Text</button>
+    <br>
+    <a href="output.html">Go to Output Page</a>
+
+    <script>
+        function saveText() {
+            const text = document.getElementById('textInput').value;
+            fetch('/saveText', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
